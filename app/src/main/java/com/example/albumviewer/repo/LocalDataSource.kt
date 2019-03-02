@@ -6,10 +6,10 @@ import io.reactivex.Maybe
 
 class LocalDataSource(private val albumViewerDatabase: AlbumViewerDatabase) : DataSource {
     override fun getSortedAlbums(isAscending: Boolean): Maybe<List<Album>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return if(isAscending) albumViewerDatabase.albumsDao().getAscendingAlbumsSortedByTitle()
+        else albumViewerDatabase.albumsDao().getDescendingAlbumsSortedByTitle()
     }
 
-    override fun addAlbum(album: Album) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun addAlbum(album: Album) = albumViewerDatabase.albumsDao().insertAlbum(album)
+
 }
