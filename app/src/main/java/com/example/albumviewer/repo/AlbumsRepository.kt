@@ -6,11 +6,14 @@ import io.reactivex.Maybe
 class AlbumsRepository(private val localDataSource: DataSource,
                        private val remoteDataSource: DataSource) : DataSource {
     override fun getSortedAlbums(isAscending: Boolean): Maybe<List<Album>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return remoteDataSource.getSortedAlbums(isAscending)
+            .doOnSuccess { it.forEach { album -> localDataSource.addAlbum(album) } }
+            .doOnError { it.printStackTrace() }
+            .onErrorResumeNext(localDataSource.getSortedAlbums(isAscending))
     }
 
     override fun addAlbum(album: Album) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        //No-OP
     }
 
 }
