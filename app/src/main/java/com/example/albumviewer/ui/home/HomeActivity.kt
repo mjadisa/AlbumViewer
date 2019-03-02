@@ -1,9 +1,10 @@
-package com.example.albumviewer
+package com.example.albumviewer.ui.home
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.example.albumviewer.R
 
-class MainActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -1,4 +1,4 @@
-package com.example.albumviewer.ui
+package com.example.albumviewer.ui.home
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
