@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="progressVisibility"
+            type="android.databinding.ObservableBoolean" />
+    </data>
 <FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -11,7 +18,7 @@
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:layout_gravity="center"
-       android:visibility="gone"
+       android:visibility="@{progressVisibility ? View.VISIBLE : View.GONE}"
        tools:visibility="visible"
        />
 
@@ -20,3 +27,4 @@
      android:layout_height="match_parent" />
 
 </FrameLayout>
+</layout>
