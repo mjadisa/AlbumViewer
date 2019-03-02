@@ -6,11 +6,12 @@ import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableBoolean
 import com.example.albumviewer.data.Album
 import com.example.albumviewer.repo.AlbumsRepository
+import com.example.albumviewer.repo.DataSource
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class HomeViewModel(private val albumsRepository: AlbumsRepository) : ViewModel() {
+class HomeViewModel(private val albumsRepository: DataSource) : ViewModel() {
 
     private val albumsObservable = MutableLiveData<List<Album>>()
     private val progressObservable = ObservableBoolean(false)

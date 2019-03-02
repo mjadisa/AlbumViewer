@@ -2,7 +2,9 @@ package com.example.albumviewer.ui.home.di
 
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import com.example.albumviewer.di.Repository
 import com.example.albumviewer.repo.AlbumsRepository
+import com.example.albumviewer.repo.DataSource
 import com.example.albumviewer.ui.home.HomeActivity
 import com.example.albumviewer.ui.home.HomeViewModel
 import com.example.albumviewer.ui.home.HomeViewModelFactory
@@ -13,7 +15,7 @@ import dagger.Provides
 class HomeModule {
     @Provides
     @HomeScope
-    fun provideHomeViewModelFactory(albumsRepository: AlbumsRepository) = HomeViewModelFactory(albumsRepository)
+    fun provideHomeViewModelFactory(@Repository albumsRepository: DataSource) = HomeViewModelFactory(albumsRepository)
 
     @Provides
     @HomeScope
