@@ -13,6 +13,14 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.AlbumViewHolder>() {
     private val data = mutableListOf<Album>()
 
 
+    fun setData(data: List<Album>?) {
+        data?.let {
+            this.data.clear()
+            this.data.addAll(data)
+            notifyDataSetChanged()
+        }
+
+    }
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): AlbumViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return AlbumViewHolder(ItemAlbumBinding.inflate(layoutInflater, parent, false))
