@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import com.example.albumviewer.R
 import com.example.albumviewer.databinding.ActivityMainBinding
@@ -27,7 +28,9 @@ class HomeActivity : AppCompatActivity() {
         val linearLayoutManager = LinearLayoutManager(this)
         val homeAdapter = HomeAdapter()
         rvData.layoutManager = linearLayoutManager
+        rvData.addItemDecoration(DividerItemDecoration(this, linearLayoutManager.orientation))
         rvData.adapter = homeAdapter
+
 
         homeViewModel.getAlbumsObservable().observe(this, Observer { homeAdapter.setData(it) })
 
