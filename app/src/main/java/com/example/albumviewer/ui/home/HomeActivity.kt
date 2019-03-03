@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.widget.Toast
 import com.example.albumviewer.R
 import com.example.albumviewer.databinding.ActivityMainBinding
 import dagger.android.AndroidInjection
@@ -33,6 +34,9 @@ class HomeActivity : AppCompatActivity() {
 
 
         homeViewModel.getAlbumsObservable().observe(this, Observer { homeAdapter.setData(it) })
+
+        homeViewModel.getErrorObservable().observe(this,
+            Observer { Toast.makeText(this, it, Toast.LENGTH_LONG).show() })
 
         homeViewModel.getData()
 
