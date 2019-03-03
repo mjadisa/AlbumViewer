@@ -2,6 +2,7 @@ package com.example.albumviewer
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.Observer
+import com.example.albumviewer.common.Utils
 import com.example.albumviewer.data.Album
 import com.example.albumviewer.repo.DataSource
 import com.example.albumviewer.ui.home.HomeViewModel
@@ -13,7 +14,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.junit.MockitoJUnitRunner
 import java.util.*
@@ -26,30 +26,55 @@ class HomeViewModelTest : BaseTest() {
 
     private val albumsRepository: DataSource = mock()
 
-    private val observer: Observer<List<Album>> = mock()
+    private val dataObserver: Observer<List<Album>> = mock()
+
+    private val errorObserver: Observer<String> = mock()
+
+    private val utils: Utils = mock()
 
     private lateinit var homeViewModel: HomeViewModel
 
     @Before
     override fun setup() {
         super.setup()
-        homeViewModel = HomeViewModel(albumsRepository)
+        homeViewModel = HomeViewModel(albumsRepository, utils)
     }
 
     @Test
-    fun testDataSuccessfullyRetrieved() {
+    fun testDataSuccessfullyRetrievedWhenOnline() {
         //Given
         val album = Album(0, 0, 1, "Test Album")
         val albums = listOf(album)
         whenever(albumsRepository.getSortedAlbums(Mockito.anyBoolean()))
             .thenReturn(Maybe.just(Collections.singletonList(album)))
+        whenever(utils.isOnline()).thenReturn(true)
 
         //When
-        homeViewModel.getAlbumsObservable().observeForever(observer)
+        homeViewModel.getAlbumsObservable().observeForever(dataObserver)
         homeViewModel.getData()
 
         //Then
-        verify(observer).onChanged(albums)
+        verify(dataObserver).onChanged(albums)
+    }
+
+    @Test
+    fun testDataSuccessfullyRetrievedWhenOffline() {
+        //Given
+        val album = Album(0, 0, 1, "Test Album")
+        val albums = listOf(album)
+        whenever(albumsRepository.getSortedAlbums(Mockito.anyBoolean()))
+            .thenReturn(Maybe.just(Collections.singletonList(album)))
+        whenever(utils.isOnline()).thenReturn(false)
+
+        //When
+        homeViewModel.getAlbumsObservable().observeForever(dataObserver)
+        homeViewModel.getErrorObservable().observeForever(errorObserver)
+
+        homeViewModel.getData()
+
+        //Then
+        verify(dataObserver).onChanged(albums)
+        verify(errorObserver).onChanged("Network Connection Not Available, cached values will be shown");
     }
 
 }
