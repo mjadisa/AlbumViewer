@@ -77,4 +77,21 @@ class HomeViewModelTest : BaseTest() {
         verify(errorObserver).onChanged("Network Connection Not Available, cached values will be shown");
     }
 
+    @Test
+    fun testOfflineAndEmptyDatabase() {
+        //Given
+        whenever(albumsRepository.getSortedAlbums(true)).thenReturn(Maybe.empty())
+        whenever(utils.isOnline()).thenReturn(false)
+
+        //When
+        homeViewModel.getErrorObservable().observeForever(errorObserver)
+        homeViewModel.getData()
+
+        //Then
+        verify(errorObserver).onChanged("Network Connection and Cached Data Not Available, " +
+                "Please try again when you have active network connection");
+
+
+
+    }
 }

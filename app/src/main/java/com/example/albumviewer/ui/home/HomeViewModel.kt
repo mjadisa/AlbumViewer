@@ -32,8 +32,8 @@ class HomeViewModel(private val albumsRepository: DataSource, private val utils:
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { progressObservable.set(true) }
-            .doOnEvent { _, _ -> progressObservable.set(false) }
-            .doOnSuccess { handleSubscription(it.isEmpty()) }
+            .doOnEvent { success, _ -> progressObservable.set(false)
+                         handleSubscription(success?.isEmpty() ?: true)}
             .subscribe({ albumsObservable.value = it }, { errorObservable.value = it.message })
         )
     }
@@ -41,6 +41,9 @@ class HomeViewModel(private val albumsRepository: DataSource, private val utils:
     private fun handleSubscription(isEmpty: Boolean) {
         if (!utils.isOnline() && !isEmpty) {
             errorObservable.value = "Network Connection Not Available, cached values will be shown"
+        } else if (!utils.isOnline()) {
+            errorObservable.value = "Network Connection and Cached Data Not Available, " +
+                    "Please try again when you have active network connection"
         }
     }
 
