@@ -8,7 +8,9 @@ class RemoteDataSource(private val typicodeService: TypicodeService) : DataSourc
 
     override fun getSortedAlbums(isAscending: Boolean): Maybe<List<Album>> {
         return typicodeService.getAlbums()
-            .map { it.sortedBy { album -> album.title } }
+            .map {
+                if (isAscending) it.sortedBy { album -> album.title }
+                else it.sortedByDescending { album -> album.title } }
             .flatMapMaybe { Maybe.just(it) }
     }
 
