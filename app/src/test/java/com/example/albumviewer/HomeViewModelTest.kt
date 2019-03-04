@@ -90,8 +90,5 @@ class HomeViewModelTest : BaseTest() {
         //Then
         verify(errorObserver).onChanged("Network Connection and Cached Data Not Available, " +
                 "Please try again when you have active network connection");
-
-
-
     }
 }

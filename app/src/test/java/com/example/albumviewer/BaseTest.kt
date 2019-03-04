@@ -1,5 +1,6 @@
 package com.example.albumviewer
 
+import com.example.albumviewer.data.Album
 import io.reactivex.Scheduler
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.disposables.Disposable
@@ -34,4 +35,11 @@ open class BaseTest {
         RxAndroidPlugins.setInitMainThreadSchedulerHandler { immediateScheduler }
     }
 
+    fun getListOfAlbums(): List<Album> {
+        val albumOne = Album(0, 0, 1, "Azul")
+        val albumTwo = Album(1, 0, 2, "Amber")
+        val albumThree = Album(2, 0, 3, "Clay")
+        val albumFour = Album(3, 0, 4, "Blue")
+        return listOf(albumOne, albumTwo, albumThree, albumFour)
+    }
 }

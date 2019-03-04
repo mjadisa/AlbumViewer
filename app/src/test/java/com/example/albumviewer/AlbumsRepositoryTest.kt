@@ -16,7 +16,7 @@ import org.mockito.junit.MockitoJUnitRunner
 import java.io.IOException
 
 @RunWith(MockitoJUnitRunner::class)
-class AlbumsRepositoryTest {
+class AlbumsRepositoryTest : BaseTest() {
     private val localDataSource: DataSource = mock()
 
     private val remoteDataSource: DataSource = mock()
@@ -26,7 +26,8 @@ class AlbumsRepositoryTest {
     private val album = Album(0, 0, 1, "Test Album")
 
     @Before
-    fun setup() {
+    override fun setup() {
+        super.setup()
         albumsRepository = AlbumsRepository(localDataSource, remoteDataSource)
         albums.add(album)
     }
