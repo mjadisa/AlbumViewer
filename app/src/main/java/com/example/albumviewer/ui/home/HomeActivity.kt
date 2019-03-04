@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.test.espresso.idling.CountingIdlingResource
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
@@ -17,6 +18,8 @@ class HomeActivity : AppCompatActivity() {
 
     @Inject
     lateinit var homeViewModel: HomeViewModel
+
+    private val countingIdlingResource: CountingIdlingResource = CountingIdlingResource(this.javaClass.simpleName)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -33,13 +36,19 @@ class HomeActivity : AppCompatActivity() {
         rvData.adapter = homeAdapter
 
 
-        homeViewModel.getAlbumsObservable().observe(this, Observer { homeAdapter.setData(it) })
+        homeViewModel.getAlbumsObservable().observe(this, Observer {
+            homeAdapter.setData(it)
+            countingIdlingResource.decrement() })
 
         homeViewModel.getErrorObservable().observe(this,
-            Observer { Toast.makeText(this, it, Toast.LENGTH_LONG).show() })
+            Observer { Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+                        countingIdlingResource.decrement()})
 
+        countingIdlingResource.increment()
         homeViewModel.getData()
 
 
     }
+
+    fun getIdlingResource() = countingIdlingResource
 }

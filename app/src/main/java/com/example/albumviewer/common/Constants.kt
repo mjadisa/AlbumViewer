@@ -1,5 +1,8 @@
 package com.example.albumviewer.common
 
+//For tests
+lateinit var TEST_BASE_URL: String
+
 const val BASE_URL = "https://jsonplaceholder.typicode.com/"
 const val ALBUM_ENDPOINT = "albums"
 const val TIMEOUT = 30L
