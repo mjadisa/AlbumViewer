@@ -35,6 +35,10 @@ class HomeActivity : AppCompatActivity() {
         rvData.addItemDecoration(DividerItemDecoration(this, linearLayoutManager.orientation))
         rvData.adapter = homeAdapter
 
+        countingIdlingResource.increment()
+
+        homeViewModel.getData()
+
 
         homeViewModel.getAlbumsObservable().observe(this, Observer {
             homeAdapter.setData(it)
@@ -44,8 +48,6 @@ class HomeActivity : AppCompatActivity() {
             Observer { Toast.makeText(this, it, Toast.LENGTH_LONG).show()
                         countingIdlingResource.decrement()})
 
-        countingIdlingResource.increment()
-        homeViewModel.getData()
 
 
     }

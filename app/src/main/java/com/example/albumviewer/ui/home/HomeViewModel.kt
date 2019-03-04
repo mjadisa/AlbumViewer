@@ -28,14 +28,15 @@ class HomeViewModel(private val albumsRepository: DataSource, private val utils:
     fun getErrorObservable() = errorObservable
 
     fun getData() {
+      if (albumsObservable.value == null) {
         compositeDisposable.add(albumsRepository.getSortedAlbums(true)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { progressObservable.set(true) }
             .doOnEvent { success, _ -> progressObservable.set(false)
                          handleSubscription(success?.isEmpty() ?: true)}
-            .subscribe({ albumsObservable.value = it }, { errorObservable.value = it.message })
-        )
+            .subscribe({ albumsObservable.value = it }, { errorObservable.value = it.message })) }
+
     }
 
     private fun handleSubscription(isEmpty: Boolean) {
