@@ -34,7 +34,7 @@ class HomeActivityTest {
     }
 
     @Test
-    fun test() {
+    fun test_WhenOnline_Success() {
         IdlingRegistry.getInstance().register(activityTestRule.activity.getIdlingResource())
         onView(withId(R.id.rvData)).check(matches(CustomMatchers.withItemCount(10)))
     }
