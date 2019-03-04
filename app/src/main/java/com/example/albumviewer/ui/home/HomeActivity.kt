@@ -45,8 +45,7 @@ class HomeActivity : AppCompatActivity() {
             countingIdlingResource.decrement() })
 
         homeViewModel.getErrorObservable().observe(this,
-            Observer { Toast.makeText(this, it, Toast.LENGTH_LONG).show()
-                        countingIdlingResource.decrement()})
+            Observer { Toast.makeText(this, it, Toast.LENGTH_LONG).show() })
 
 
 
