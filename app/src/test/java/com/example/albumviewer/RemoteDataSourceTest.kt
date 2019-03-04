@@ -31,9 +31,9 @@ class RemoteDataSourceTest : BaseTest() {
         //When
         val testObserver = remoteDataSource.getSortedAlbums(true).test()
         //Then
-        val result = testObserver.values().get(0)
+        val result = testObserver.values()[0]
         Assert.assertTrue(result[0].title == "Amber")
-        Assert.assertTrue(result[3].title.equals("Clay"))
+        Assert.assertTrue(result[3].title == "Clay")
     }
 
     @Test
@@ -43,7 +43,7 @@ class RemoteDataSourceTest : BaseTest() {
         //When
         val testObserver = remoteDataSource.getSortedAlbums(false).test()
         //Then
-        val result = testObserver.values().get(0)
+        val result = testObserver.values()[0]
         Assert.assertTrue(result[0].title == "Clay")
         Assert.assertTrue(result[3].title == "Amber")
     }

@@ -6,7 +6,6 @@ import android.arch.lifecycle.ViewModel
 import android.databinding.ObservableBoolean
 import com.example.albumviewer.common.Utils
 import com.example.albumviewer.data.Album
-import com.example.albumviewer.repo.AlbumsRepository
 import com.example.albumviewer.repo.DataSource
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

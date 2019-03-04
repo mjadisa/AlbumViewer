@@ -52,7 +52,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideTypicodeService(retrofit: Retrofit) = retrofit.create(TypicodeService::class.java)
+    fun provideTypicodeService(retrofit: Retrofit): TypicodeService = retrofit.create(TypicodeService::class.java)
 
 
     @Provides

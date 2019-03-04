@@ -1,7 +1,6 @@
 package com.example.albumviewer
 
 import android.content.Intent
-import android.support.test.espresso.Espresso
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.IdlingRegistry
 import android.support.test.espresso.assertion.ViewAssertions.matches

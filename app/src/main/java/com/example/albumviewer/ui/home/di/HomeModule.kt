@@ -1,11 +1,9 @@
 package com.example.albumviewer.ui.home.di
 
 import android.app.Application
-import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import com.example.albumviewer.common.UtilsImpl
 import com.example.albumviewer.di.Repository
-import com.example.albumviewer.repo.AlbumsRepository
 import com.example.albumviewer.repo.DataSource
 import com.example.albumviewer.ui.home.HomeActivity
 import com.example.albumviewer.ui.home.HomeViewModel

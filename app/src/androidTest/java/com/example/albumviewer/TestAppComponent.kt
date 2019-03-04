@@ -1,8 +1,10 @@
 package com.example.albumviewer
 
 import android.app.Application
-import com.example.albumviewer.di.*
-import com.example.albumviewer.di.NetworkModule
+import com.example.albumviewer.di.AppComponent
+import com.example.albumviewer.di.BuildersModule
+import com.example.albumviewer.di.DatabaseModule
+import com.example.albumviewer.di.RepositoryModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule

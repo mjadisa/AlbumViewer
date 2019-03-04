@@ -74,7 +74,7 @@ class HomeViewModelTest : BaseTest() {
 
         //Then
         verify(dataObserver).onChanged(albums)
-        verify(errorObserver).onChanged("Network Connection Not Available, cached values will be shown");
+        verify(errorObserver).onChanged("Network Connection Not Available, cached values will be shown")
     }
 
     @Test
@@ -89,6 +89,6 @@ class HomeViewModelTest : BaseTest() {
 
         //Then
         verify(errorObserver).onChanged("Network Connection and Cached Data Not Available, " +
-                "Please try again when you have active network connection");
+                "Please try again when you have active network connection")
     }
 }

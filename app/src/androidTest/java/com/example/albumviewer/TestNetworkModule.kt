@@ -1,7 +1,6 @@
 package com.example.albumviewer
 
 import android.app.Application
-import com.example.albumviewer.common.BASE_URL
 import com.example.albumviewer.common.RETROFIT_CACHE_SIZE
 import com.example.albumviewer.common.TEST_BASE_URL
 import com.example.albumviewer.common.TIMEOUT
@@ -56,7 +55,7 @@ class TestNetworkModule {
 
     @Provides
     @Singleton
-    fun provideTypicodeService(retrofit: Retrofit) = retrofit.create(TypicodeService::class.java)
+    fun provideTypicodeService(retrofit: Retrofit): TypicodeService = retrofit.create(TypicodeService::class.java)
 
 
     @Provides

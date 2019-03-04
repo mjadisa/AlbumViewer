@@ -32,7 +32,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.AlbumViewHolder>() {
         viewHolder.bind(data[position])
     }
 
-    inner class AlbumViewHolder(val itemBinding: ItemAlbumBinding) : RecyclerView.ViewHolder(itemBinding.root),
+    inner class AlbumViewHolder(private val itemBinding: ItemAlbumBinding) : RecyclerView.ViewHolder(itemBinding.root),
         LayoutContainer {
         override val containerView: View?
             get() = itemBinding.root
